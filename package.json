@@ -6,6 +6,10 @@
   "private": true,
   "scripts": {
     "ng": "ng",
+    "styles:build": "tailwindcss -i src/styles.input.css -o src/styles.css",
+    "styles:watch": "tailwindcss -i src/styles.input.css -o src/styles.css --watch",
+    "prestart": "pnpm styles:build",
+    "prebuild": "pnpm styles:build",
     "start": "ng serve --port 5100",
     "dev": "ng serve --port 5100",
     "build": "ng build",
@@ -33,6 +37,7 @@
     "@angular-devkit/build-angular": "^19.2.27",
     "@angular/cli": "^19.2.27",
     "@angular/compiler-cli": "^19.2.0",
+    "@tailwindcss/cli": "^4.0.0",
     "@tailwindcss/postcss": "^4.0.0",
     "@types/node": "^22.10.0",
     "postcss": "^8.4.49",
