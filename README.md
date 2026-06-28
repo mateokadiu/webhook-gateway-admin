@@ -86,6 +86,27 @@ src/app/
     └── settings/           # base URL + bearer token
 ```
 
+## Deploy
+
+The admin is a static SPA — any CDN works. Recommended targets:
+
+### Cloudflare Pages (free, edge, recommended)
+
+1. Push this repo to GitHub (already done).
+2. In Cloudflare Pages → **Create application** → connect `mateokadiu/webhook-gateway-admin`.
+3. Build settings:
+   - **Framework preset:** Angular
+   - **Build command:** `pnpm install --frozen-lockfile && pnpm build`
+   - **Build output directory:** `dist/webhook-gateway-admin/browser`
+   - **Environment variables:** none (the API base is configurable at runtime via the Settings page)
+4. Deploy. The admin lands at `<project>.pages.dev`.
+
+### Anywhere else
+
+The static build (`pnpm build`) emits `dist/webhook-gateway-admin/browser/` which contains plain HTML/CSS/JS. Serve it from S3 + CloudFront, Netlify, Vercel static, GitHub Pages, or a plain Nginx — pick whichever.
+
+Configure the API base URL via the **Settings** page once deployed; the value is stored in `localStorage` so each visitor can point at their own backend.
+
 ## Decisions log
 
 | # | Decision | Why |
